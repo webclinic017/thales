@@ -23,6 +23,7 @@
  */
 
 #include <gtest/gtest.h>
+#include <cmath>
 #include "trading/black_scholes.h"
 
 class BlackScholesTest : public ::testing::Test {
