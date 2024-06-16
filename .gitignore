@@ -30,3 +30,6 @@
 *.exe
 *.out
 *.app
+config/polygon_credentials.cfg
+
+build/
