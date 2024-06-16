@@ -7,7 +7,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Find dependencies
 find_package(Threads REQUIRED)
-find_package(Polygon REQUIRED)
+find_package(CURL REQUIRED)
 
 # Google Test
 find_package(GTest CONFIG REQUIRED)
@@ -18,7 +18,7 @@ find_package(benchmark CONFIG REQUIRED)
 # Include directories
 include_directories(
     include
-    ${Polygon_INCLUDE_DIRS}
+    ${CURL_INCLUDE_DIRS}
     ${GTEST_INCLUDE_DIRS}
     ${BENCHMARK_INCLUDE_DIRS}
 )
@@ -38,7 +38,7 @@ file(GLOB_RECURSE HEADERS
 add_executable(thales ${SOURCES} ${HEADERS})
 target_link_libraries(thales PRIVATE
     Threads::Threads
-    ${Polygon_LIBRARIES}
+    ${CURL_LIBRARIES}
 )
 
 # Tests
