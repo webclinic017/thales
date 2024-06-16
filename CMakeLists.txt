@@ -43,6 +43,9 @@ target_link_libraries(utils PRIVATE
 # Shared library for common code
 add_library(shared_code STATIC
     src/trading/black_scholes.cpp
+    src/trading/portfolio.cpp
+    src/trading/order.cpp
+    src/trading/position.cpp
 )
 target_include_directories(shared_code PUBLIC include include/trading)
 target_link_libraries(shared_code PRIVATE utils config)
