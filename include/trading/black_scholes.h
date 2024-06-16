@@ -38,7 +38,7 @@ enum OptionType {
  * @brief Black-Scholes model for option pricing
  */
 class BlackScholes {
-public:
+   public:
     /**
      * @brief Calculate the price of an option using the Black-Scholes model
      *
@@ -50,5 +50,6 @@ public:
      * @param type Option type (CALL or PUT)
      * @return double Option price
      */
-    double calculate_option_price(double S, double K, double T, double r, double sigma, OptionType type);
+    double calculate_option_price(double S, double K, double T, double r,
+                                  double sigma, OptionType type);
 };
