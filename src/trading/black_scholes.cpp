@@ -36,7 +36,7 @@ double BlackScholes::calculate_option_price(double S, double K, double T, double
 
     if (type == CALL) {
         return S * 0.5 * (1 + erf(d1 / sqrt(2))) - K * exp(-r * T) * 0.5 * (1 + erf(d2 / sqrt(2)));
-    } else {
-        return K * exp(-r * T) * 0.5 * (1 + erf(-d2 / sqrt(2))) - S * 0.5 * (1 + erf(-d1 / sqrt(2)));
     }
+    
+    return K * exp(-r * T) * 0.5 * (1 + erf(-d2 / sqrt(2))) - S * 0.5 * (1 + erf(-d1 / sqrt(2)));
 }
