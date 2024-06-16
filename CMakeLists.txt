@@ -18,6 +18,7 @@ find_package(benchmark CONFIG REQUIRED)
 # Include directories
 include_directories(
     include
+    include/trading
     ${CURL_INCLUDE_DIRS}
     ${BENCHMARK_INCLUDE_DIRS}
 )
@@ -39,12 +40,20 @@ target_link_libraries(utils PRIVATE
     ${CURL_LIBRARIES}
 )
 
+# Shared library for common code
+add_library(shared_code STATIC
+    src/trading/black_scholes.cpp
+    # Add other shared source files if needed
+)
+target_include_directories(shared_code PUBLIC include include/trading)
+target_link_libraries(shared_code PRIVATE utils config)
+
 # Main executable
 add_executable(thales
     src/main.cpp
     # Add other source files for the 'thales' executable
 )
-target_link_libraries(thales PRIVATE utils config)
+target_link_libraries(thales PRIVATE shared_code utils config)
 
 # Tests
 enable_testing()
