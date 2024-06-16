@@ -5,14 +5,14 @@ project(thales)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+# Enable AddressSanitizer
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address -g")
+set(CMAKE_LINKER_FLAGS "${CMAKE_LINKER_FLAGS} -fsanitize=address")
+
 # Find dependencies
 find_package(Threads REQUIRED)
 find_package(CURL REQUIRED)
-
-# Google Test
 find_package(GTest REQUIRED)
-
-# Google Benchmark
 find_package(benchmark CONFIG REQUIRED)
 
 # Include directories
@@ -43,7 +43,6 @@ target_link_libraries(utils PRIVATE
 # Shared library for common code
 add_library(shared_code STATIC
     src/trading/black_scholes.cpp
-    # Add other shared source files if needed
 )
 target_include_directories(shared_code PUBLIC include include/trading)
 target_link_libraries(shared_code PRIVATE utils config)
@@ -51,16 +50,19 @@ target_link_libraries(shared_code PRIVATE utils config)
 # Main executable
 add_executable(thales
     src/main.cpp
-    # Add other source files for the 'thales' executable
 )
 target_link_libraries(thales PRIVATE shared_code utils config)
 
 # Tests
 enable_testing()
-add_subdirectory(tests)
+add_executable(thales_tests tests/test_black_scholes.cpp)
+target_link_libraries(thales_tests PRIVATE shared_code utils config GTest::GTest GTest::Main CURL::libcurl Threads::Threads)
+
+add_test(NAME TestBlackScholes COMMAND thales_tests)
 
 # Benchmarks
-add_subdirectory(benchmarks)
+add_executable(thales_benchmarks benchmarks/benchmark_black_scholes.cpp)
+target_link_libraries(thales_benchmarks PRIVATE shared_code utils config benchmark::benchmark Threads::Threads)
 
 # Installation
 install(TARGETS thales DESTINATION bin)
