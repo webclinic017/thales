@@ -1,6 +1,7 @@
 # thales: an algorithmic options trading bot
 
 ![build](https://github.com/cm-jones/thales/actions/workflows/ci.yml/badge.svg)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 
 Thales is an algorithmic trading bot designed for options trading, named after the Greek philosopher Thales of Miletus, who is credited with the first recorded use of an options contract.
