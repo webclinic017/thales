@@ -27,12 +27,12 @@
 #include <string>
 
 namespace thales {
+
 class HttpClient {
-   public:
+public:
     HttpClient();
     ~HttpClient();
-
     std::string get(const std::string& url);
-    // Add other HTTP methods as needed (e.g., post, put, delete)
 };
-}  // namespace thales
+
+} // namespace thales
