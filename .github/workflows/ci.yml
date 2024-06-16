@@ -17,14 +17,8 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Set up C++ environment
-      uses: actions/setup-cpp@v2
-      with:
-        compiler: gcc
-        build-type: Release
-
     - name: Install dependencies
-      run: sudo apt-get install -y cmake g++ lcov
+      run: sudo apt-get update && sudo apt-get install -y cmake g++ lcov
 
     - name: Create build directory
       run: cmake -S . -B build
