@@ -18,7 +18,7 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Install dependencies
-      run: sudo apt-get update && sudo apt-get install -y cmake g++ lcov
+      run: sudo apt-get update && sudo apt-get install -y cmake g++ lcov libcurl4-openssl-dev
 
     - name: Create build directory
       run: cmake -S . -B build
