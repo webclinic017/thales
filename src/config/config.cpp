@@ -26,20 +26,31 @@
 
 #include <fstream>
 #include <sstream>
+#include <iostream>
+#include <stdexcept>
 
 namespace thales {
+
 std::string Config::get_api_key() {
     std::ifstream file("config/polygon_credentials.cfg");
+    if (!file.is_open()) {
+        throw std::runtime_error("Unable to open config file.");
+    }
+
     std::string line;
+
     while (std::getline(file, line)) {
         std::istringstream iss(line);
         std::string key, value;
+
         if (std::getline(std::getline(iss, key, '='), value)) {
             if (key == "API_KEY") {
                 return value;
             }
         }
     }
-    return "";
+
+    throw std::runtime_error("API_KEY not found in config file.");
 }
+
 }  // namespace thales
