@@ -23,20 +23,22 @@
  */
 
 #include <gtest/gtest.h>
+
 #include <cmath>
+
 #include "trading/black_scholes.h"
 
 class BlackScholesTest : public ::testing::Test {
-protected:
+   protected:
     BlackScholes bs;
 };
 
 TEST_F(BlackScholesTest, CalculateOptionPrice) {
-    double S = 100.0;   // Current stock price
-    double K = 100.0;   // Strike price
-    double T = 1.0;     // Time to maturity (in years)
-    double r = 0.05;    // Risk-free interest rate
-    double sigma = 0.2; // Volatility
+    double S = 100.0;    // Current stock price
+    double K = 100.0;    // Strike price
+    double T = 1.0;      // Time to maturity (in years)
+    double r = 0.05;     // Risk-free interest rate
+    double sigma = 0.2;  // Volatility
 
     double call_price = bs.calculate_option_price(S, K, T, r, sigma, CALL);
     double put_price = bs.calculate_option_price(S, K, T, r, sigma, PUT);
@@ -46,23 +48,24 @@ TEST_F(BlackScholesTest, CalculateOptionPrice) {
 }
 
 TEST_F(BlackScholesTest, DeepInTheMoneyPutOption) {
-    double S = 50.0;    // Current stock price
-    double K = 100.0;   // Strike price
-    double T = 1.0;     // Time to maturity (in years)
-    double r = 0.05;    // Risk-free interest rate
-    double sigma = 0.2; // Volatility
+    double S = 50.0;     // Current stock price
+    double K = 100.0;    // Strike price
+    double T = 1.0;      // Time to maturity (in years)
+    double r = 0.05;     // Risk-free interest rate
+    double sigma = 0.2;  // Volatility
 
     double put_price = bs.calculate_option_price(S, K, T, r, sigma, PUT);
-    double expected_put_price = K * exp(-r * T) - S; // Adjusted expected value calculation
+    double expected_put_price =
+        K * exp(-r * T) - S;  // Adjusted expected value calculation
     ASSERT_NEAR(put_price, expected_put_price, 1e-2);
 }
 
 TEST_F(BlackScholesTest, ZeroVolatility) {
-    double S = 100.0;   // Current stock price
-    double K = 100.0;   // Strike price
-    double T = 1.0;     // Time to maturity (in years)
-    double r = 0.05;    // Risk-free interest rate
-    double sigma = 0.0; // Zero volatility
+    double S = 100.0;    // Current stock price
+    double K = 100.0;    // Strike price
+    double T = 1.0;      // Time to maturity (in years)
+    double r = 0.05;     // Risk-free interest rate
+    double sigma = 0.0;  // Zero volatility
 
     double call_price = bs.calculate_option_price(S, K, T, r, sigma, CALL);
     double put_price = bs.calculate_option_price(S, K, T, r, sigma, PUT);
@@ -75,11 +78,11 @@ TEST_F(BlackScholesTest, ZeroVolatility) {
 }
 
 TEST_F(BlackScholesTest, ZeroInterestRate) {
-    double S = 100.0;   // Current stock price
-    double K = 100.0;   // Strike price
-    double T = 1.0;     // Time to maturity (in years)
-    double r = 0.0;     // Zero interest rate
-    double sigma = 0.2; // Volatility
+    double S = 100.0;    // Current stock price
+    double K = 100.0;    // Strike price
+    double T = 1.0;      // Time to maturity (in years)
+    double r = 0.0;      // Zero interest rate
+    double sigma = 0.2;  // Volatility
 
     double call_price = bs.calculate_option_price(S, K, T, r, sigma, CALL);
     double put_price = bs.calculate_option_price(S, K, T, r, sigma, PUT);
@@ -89,11 +92,11 @@ TEST_F(BlackScholesTest, ZeroInterestRate) {
 }
 
 TEST_F(BlackScholesTest, NearExpiry) {
-    double S = 100.0;   // Current stock price
-    double K = 100.0;   // Strike price
-    double T = 0.01;    // Near expiry (in years)
-    double r = 0.05;    // Risk-free interest rate
-    double sigma = 0.2; // Volatility
+    double S = 100.0;    // Current stock price
+    double K = 100.0;    // Strike price
+    double T = 0.01;     // Near expiry (in years)
+    double r = 0.05;     // Risk-free interest rate
+    double sigma = 0.2;  // Volatility
 
     double call_price = bs.calculate_option_price(S, K, T, r, sigma, CALL);
     double put_price = bs.calculate_option_price(S, K, T, r, sigma, PUT);
@@ -103,11 +106,11 @@ TEST_F(BlackScholesTest, NearExpiry) {
 }
 
 TEST_F(BlackScholesTest, LongTimeToExpiry) {
-    double S = 100.0;   // Current stock price
-    double K = 100.0;   // Strike price
-    double T = 10.0;    // Long time to maturity (in years)
-    double r = 0.05;    // Risk-free interest rate
-    double sigma = 0.2; // Volatility
+    double S = 100.0;    // Current stock price
+    double K = 100.0;    // Strike price
+    double T = 10.0;     // Long time to maturity (in years)
+    double r = 0.05;     // Risk-free interest rate
+    double sigma = 0.2;  // Volatility
 
     double call_price = bs.calculate_option_price(S, K, T, r, sigma, CALL);
     double put_price = bs.calculate_option_price(S, K, T, r, sigma, PUT);
@@ -116,7 +119,7 @@ TEST_F(BlackScholesTest, LongTimeToExpiry) {
     ASSERT_GT(put_price, 0);
 }
 
-int main(int argc, char **argv) {
+int main(int argc, char** argv) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
 }
