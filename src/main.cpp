@@ -22,29 +22,58 @@
  * SOFTWARE.
  */
 
+#include <chrono>
+#include <cstdlib>
 #include <iostream>
+#include <thread>
 
 #include "config/config.h"
+#include "trading/portfolio.h"
 #include "utils/http_client.h"
 
 int main() {
-    std::cout << "Thales Options Trading Bot" << std::endl;
+    std::cout << "Thales Options Trading Bot\n";
 
-    std::string api_key = thales::Config::get_api_key();
-    if (api_key.empty()) {
-        std::cerr << "API key not found in the configuration file."
-                  << std::endl;
-        return 1;
+    std::string api_key;
+    try {
+        api_key = thales::Config::get_api_key();
+    } catch (const std::exception& e) {
+        std::cerr << "Error: " << e.what() << std::endl;
+        return EXIT_FAILURE;
     }
 
     thales::HttpClient http_client;
     std::string url =
         "https://api.polygon.io/v2/aggs/ticker/AAPL/range/1/day/2023-01-01/"
-        "2023-01-31?api_key=" +
+        "2023-01-31?apiKey=" +
         api_key;
+    std::string result;
+    try {
+        result = http_client.get(url);
+    } catch (const std::exception& e) {
+        std::cerr << "HTTP request failed: " << e.what() << std::endl;
+        return EXIT_FAILURE;
+    }
 
-    std::string response = http_client.get(url);
-    std::cout << "Response: " << response << std::endl;
+    while (true) {
+        // Fetch and display portfolio information
+        thales::Portfolio portfolio = thales::fetch_portfolio();
+        thales::display_portfolio(portfolio);
 
-    return 0;
+        // Fetch and display executed orders
+        std::vector<thales::Order> orders = thales::fetch_orders();
+        thales::display_orders(orders);
+
+        // Sleep for 1 second before updating
+        std::this_thread::sleep_for(std::chrono::seconds(1));
+
+        // Clear the screen (platform-dependent)
+#if defined(_WIN32) || defined(_WIN64)
+        std::system("cls");
+#else
+        std::system("clear");
+#endif
+    }
+
+    return EXIT_SUCCESS;
 }
