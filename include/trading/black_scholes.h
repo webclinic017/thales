@@ -50,6 +50,6 @@ class BlackScholes {
      * @param type Option type (CALL or PUT)
      * @return double Option price
      */
-    double calculate_option_price(double S, double K, double T, double r,
+    static double calculate_option_price(double S, double K, double T, double r,
                                   double sigma, OptionType type);
 };

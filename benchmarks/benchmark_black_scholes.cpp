@@ -22,40 +22,19 @@
  * SOFTWARE.
  */
 
-#include <benchmark/benchmark.h>
-
+#include "benchmark/benchmark.h"
 #include "trading/black_scholes.h"
 
-static void BM_BlackScholesCall(benchmark::State& state) {
-    BlackScholes bs;
-
-    double S = 100.0;    // Current stock price
-    double K = 100.0;    // Strike price
-    double T = 1.0;      // Time to maturity (in years)
-    double r = 0.05;     // Risk-free interest rate
-    double sigma = 0.2;  // Volatility
-
+static void BM_BlackScholes_Call(benchmark::State& state) {
     for (auto _ : state) {
-        double call_price = bs.calculate_option_price(S, K, T, r, sigma, CALL);
-        benchmark::DoNotOptimize(call_price);
+        benchmark::DoNotOptimize(BlackScholes::calculate_option_price(100.0, 100.0, 1.0, 0.05, 0.2, OptionType::CALL));
     }
 }
-BENCHMARK(BM_BlackScholesCall);
+BENCHMARK(BM_BlackScholes_Call);
 
-static void BM_BlackScholesPut(benchmark::State& state) {
-    BlackScholes bs;
-
-    double S = 100.0;    // Current stock price
-    double K = 100.0;    // Strike price
-    double T = 1.0;      // Time to maturity (in years)
-    double r = 0.05;     // Risk-free interest rate
-    double sigma = 0.2;  // Volatility
-
+static void BM_BlackScholes_Put(benchmark::State& state) {
     for (auto _ : state) {
-        double put_price = bs.calculate_option_price(S, K, T, r, sigma, PUT);
-        benchmark::DoNotOptimize(put_price);
+        benchmark::DoNotOptimize(BlackScholes::calculate_option_price(100.0, 100.0, 1.0, 0.05, 0.2, OptionType::PUT));
     }
 }
-BENCHMARK(BM_BlackScholesPut);
-
-BENCHMARK_MAIN();
+BENCHMARK(BM_BlackScholes_Put);
