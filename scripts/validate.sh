@@ -1,7 +1,8 @@
 #!/bin/sh
 
 # Navigate to the project root directory
-cd "$(dirname "$0")/.."
+PROJECT_ROOT=$(git rev-parse --show-toplevel)
+cd "$PROJECT_ROOT"
 
 # Run clang-format and clang-tidy in parallel
 ./scripts/format.sh &
