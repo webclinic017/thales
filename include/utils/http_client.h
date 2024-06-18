@@ -29,10 +29,10 @@
 namespace thales {
 
 class HttpClient {
-public:
+   public:
     HttpClient();
     ~HttpClient();
     std::string get(const std::string& url);
 };
 
-} // namespace thales
+}  // namespace thales
