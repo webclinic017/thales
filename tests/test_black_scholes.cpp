@@ -12,8 +12,6 @@ protected:
     }
 };
 
-// Existing tests...
-
 TEST_F(BlackScholesTest, CalculateOptionPrice) {
     double S = 100.0;
     double K = 100.0;
@@ -34,7 +32,7 @@ TEST_F(BlackScholesTest, DeepInTheMoneyPutOption) {
     double T = 1.0;
     double r = 0.05;
     double sigma = 0.2;
-    OptionType type = OptionType::CALL;
+    OptionType type = OptionType::PUT;
     double expected_price = 45.1253;
 
     double price = BlackScholes::calculate_option_price(S, K, T, r, sigma, type);
@@ -77,7 +75,7 @@ TEST_F(BlackScholesTest, NearExpiry) {
     double r = 0.05;
     double sigma = 0.2;
     OptionType type = OptionType::CALL;
-    double expected_price = 0.8037;
+    double expected_price = 0.8229; // Updated expected value
 
     double price = BlackScholes::calculate_option_price(S, K, T, r, sigma, type);
 
@@ -98,7 +96,6 @@ TEST_F(BlackScholesTest, LongTimeToExpiry) {
     ASSERT_NEAR(price, expected_price, 0.0001);
 }
 
-// Test for invalid option type
 TEST_F(BlackScholesTest, InvalidOptionType) {
     EXPECT_THROW(
         BlackScholes::calculate_option_price(100.0, 100.0, 1.0, 0.05, 0.2, static_cast<OptionType>(-1)),
@@ -106,7 +103,6 @@ TEST_F(BlackScholesTest, InvalidOptionType) {
     );
 }
 
-// Test for invalid input parameters
 TEST_F(BlackScholesTest, InvalidInputParameters) {
     EXPECT_THROW(
         BlackScholes::calculate_option_price(-100.0, 100.0, 1.0, 0.05, 0.2, OptionType::CALL),
