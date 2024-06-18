@@ -19,9 +19,9 @@ jobs:
         run: |
           sudo apt-get install -y cmake libgtest-dev
           cd /usr/src/gtest
-          sudo cmake CMakeLists.txt
-          sudo make
-          sudo cp *.a /usr/lib
+          sudo cmake -B build
+          sudo cmake --build build
+          sudo cp build/lib/*.a /usr/lib
 
       - name: Build
         run: |
