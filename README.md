@@ -1,6 +1,7 @@
 # Thales: an Algorithmic Options Trading Bot
 
 ![build](https://github.com/cm-jones/thales/actions/workflows/ci.yml/badge.svg)
+[![codecov](https://codecov.io/gh/cm-jones/thales/branch/main/graph/badge.svg?token=fc9ee083-78b6-4e43-bf23-bfa85832df85)](https://codecov.io/gh/cm-jones/thales)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 
