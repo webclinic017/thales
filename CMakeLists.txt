@@ -58,13 +58,27 @@ target_link_libraries(thales PRIVATE shared_code utils config)
 
 # Tests
 enable_testing()
-add_executable(thales_tests tests/test_black_scholes.cpp)
-target_link_libraries(thales_tests PRIVATE shared_code utils config GTest::GTest GTest::Main CURL::libcurl Threads::Threads)
 
-add_test(NAME TestBlackScholes COMMAND thales_tests)
+# Black Scholes tests
+add_executable(test_black_scholes
+    tests/test_black_scholes.cpp
+)
+target_link_libraries(test_black_scholes PRIVATE shared_code utils config GTest::GTest GTest::Main CURL::libcurl Threads::Threads)
+add_test(NAME TestBlackScholes COMMAND test_black_scholes)
 
-# Benchmarks
-add_executable(thales_benchmarks benchmarks/benchmark_black_scholes.cpp)
+# Portfolio tests
+add_executable(test_portfolio
+    tests/test_portfolio.cpp
+)
+target_link_libraries(test_portfolio PRIVATE shared_code utils config GTest::GTest GTest::Main CURL::libcurl Threads::Threads)
+add_test(NAME TestPortfolio COMMAND test_portfolio)
+
+# Combined benchmarks
+add_executable(thales_benchmarks
+    benchmarks/benchmark_main.cpp
+    benchmarks/benchmark_black_scholes.cpp
+    benchmarks/benchmark_portfolio.cpp
+)
 target_link_libraries(thales_benchmarks PRIVATE shared_code utils config benchmark::benchmark Threads::Threads)
 
 # Installation
