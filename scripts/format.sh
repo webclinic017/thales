@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # Navigate to the project root directory
 cd "$(dirname "$0")/.."
