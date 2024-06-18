@@ -1,4 +1,4 @@
-# Thales: an algorithmic options trading bot
+# Thales: an Algorithmic Options Trading Bot
 
 ![build](https://github.com/cm-jones/thales/actions/workflows/ci.yml/badge.svg)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
