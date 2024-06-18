@@ -23,18 +23,18 @@
  */
 
 #include "config/config.h"
-
 #include <fstream>
 #include <sstream>
-#include <iostream>
 #include <stdexcept>
 
 namespace thales {
-
 std::string Config::get_api_key() {
-    std::ifstream file("config/polygon_credentials.cfg");
+    // Assuming the executable is run from the build/ directory
+    std::string config_path = "../config/polygon_credentials.cfg";
+
+    std::ifstream file(config_path);
     if (!file.is_open()) {
-        throw std::runtime_error("Unable to open config file.");
+        throw std::runtime_error("Unable to open configuration file: " + config_path);
     }
 
     std::string line;
@@ -50,7 +50,6 @@ std::string Config::get_api_key() {
         }
     }
 
-    throw std::runtime_error("API_KEY not found in config file.");
+    throw std::runtime_error("API_KEY not found in configuration file: " + config_path);
 }
-
 }  // namespace thales
