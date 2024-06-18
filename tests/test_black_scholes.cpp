@@ -119,6 +119,32 @@ TEST_F(BlackScholesTest, LongTimeToExpiry) {
     ASSERT_GT(put_price, 0);
 }
 
+TEST(BlackScholesTest, InvalidOptionType) {
+    EXPECT_THROW(
+        BlackScholes::calculate_option_price(100.0, 100.0, 1.0, 0.05, 0.2, static_cast<OptionType>(-1)),
+        std::invalid_argument
+    );
+}
+
+TEST(BlackScholesTest, InvalidInputParameters) {
+    EXPECT_THROW(
+        BlackScholes::calculate_option_price(-100.0, 100.0, 1.0, 0.05, 0.2, OptionType::CALL),
+        std::invalid_argument
+    );
+    EXPECT_THROW(
+        BlackScholes::calculate_option_price(100.0, -100.0, 1.0, 0.05, 0.2, OptionType::CALL),
+        std::invalid_argument
+    );
+    EXPECT_THROW(
+        BlackScholes::calculate_option_price(100.0, 100.0, -1.0, 0.05, 0.2, OptionType::CALL),
+        std::invalid_argument
+    );
+    EXPECT_THROW(
+        BlackScholes::calculate_option_price(100.0, 100.0, 1.0, 0.05, -0.2, OptionType::CALL),
+        std::invalid_argument
+    );
+}
+
 int main(int argc, char** argv) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
