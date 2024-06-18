@@ -87,7 +87,7 @@ Please refer to the individual configuration files and the project documentation
 
 ## Contributing
 
-Contributions to the Thales project are welcome! If you encounter any issues or have suggestions for improvements, please open an issue or submit a pull request on the project's GitHub repository.
+If you find any issues or have suggestions for improvements, feel free to [open an issue](https://github.com/cm-jones/thales/issues/new) or submit a [pull request](https://github.com/thales/libdsc/compare).
 
 ## License
 
