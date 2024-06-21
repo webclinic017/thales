@@ -22,21 +22,21 @@
  * SOFTWARE.
  */
 
+#include <vector>
+
+#include "gtest/gtest.h"
 #include "trading/portfolio.h"
 #include "trading/position.h"
-#include "gtest/gtest.h"
-#include <vector>
 
 namespace thales {
 
 TEST(PortfolioTest, Construction) {
     std::vector<Position> positions = {
         Position("AAPL", "Call", 150.0, "2024-12-15", 10, 5.0),
-        Position("TSLA", "Put", 700.0, "2024-12-15", 5, 10.0)
-    };
+        Position("TSLA", "Put", 700.0, "2024-12-15", 5, 10.0)};
     Portfolio portfolio(10000.0, positions);
-    
-    EXPECT_EQ(portfolio.get_value(), 10000.0);
+
+    EXPECT_EQ(portfolio.get_net_liquidity(), 10000.0);
     ASSERT_EQ(portfolio.get_positions().size(), positions.size());
     EXPECT_EQ(portfolio.get_positions()[0].get_symbol(), "AAPL");
     EXPECT_EQ(portfolio.get_positions()[1].get_symbol(), "TSLA");
@@ -45,18 +45,16 @@ TEST(PortfolioTest, Construction) {
 TEST(PortfolioTest, GetValue) {
     std::vector<Position> positions = {
         Position("AAPL", "Call", 150.0, "2024-12-15", 10, 5.0),
-        Position("TSLA", "Put", 700.0, "2024-12-15", 5, 10.0)
-    };
+        Position("TSLA", "Put", 700.0, "2024-12-15", 5, 10.0)};
     Portfolio portfolio(10000.0, positions);
 
-    EXPECT_EQ(portfolio.get_value(), 10000.0);
+    EXPECT_EQ(portfolio.get_net_liquidity(), 10000.0);
 }
 
 TEST(PortfolioTest, GetPositions) {
     std::vector<Position> positions = {
         Position("AAPL", "Call", 150.0, "2024-12-15", 10, 5.0),
-        Position("TSLA", "Put", 700.0, "2024-12-15", 5, 10.0)
-    };
+        Position("TSLA", "Put", 700.0, "2024-12-15", 5, 10.0)};
     Portfolio portfolio(10000.0, positions);
 
     ASSERT_EQ(portfolio.get_positions().size(), 2);
