@@ -31,12 +31,12 @@
 #include "trading/portfolio.h"
 #include "utils/http_client.h"
 
-int main() {
-    std::cout << "Thales Options Trading Bot\n";
+using namespace thales;
 
+int main() {
     std::string api_key;
     try {
-        api_key = thales::Config::get_api_key();
+        api_key = Config::get_api_key();
     } catch (const std::exception& e) {
         std::cerr << "Error: " << e.what() << std::endl;
         return EXIT_FAILURE;
@@ -57,12 +57,12 @@ int main() {
 
     while (true) {
         // Fetch and display portfolio information
-        thales::Portfolio portfolio = thales::fetch_portfolio();
-        thales::display_portfolio(portfolio);
+        Portfolio portfolio = fetch_portfolio();
+        display_portfolio(portfolio);
 
         // Fetch and display executed orders
-        std::vector<thales::Order> orders = thales::fetch_orders();
-        thales::display_orders(orders);
+        std::vector<Order> orders = fetch_orders();
+        display_orders(orders);
 
         // Sleep for 1 second before updating
         std::this_thread::sleep_for(std::chrono::seconds(1));
