@@ -74,9 +74,9 @@ This will execute all the registered benchmarks and display the results.
 
 ## Configuration
 
-The Thales trading bot can be configured through various configuration files located in the `config` directory. Here's a brief overview of the available configuration options:
+Thales can be configured through various configuration files inside `config` directory. Here's a brief overview of the available configuration options:
 
-- `polygon_credentials.cfg`: Contains the Polygon.io API key for accessing real-time and historical data.
+- `polygon_credentials.cfg` (required): Contains the Polygon.io API key for accessing real-time and historical data.
 - `trading_strategy.cfg`: Defines the parameters and settings for the trading strategy.
 - `risk_management.cfg`: Specifies risk management rules and thresholds.
 - `data_sources.cfg`: Configures the data sources for historical and real-time market data.
