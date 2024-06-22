@@ -6,16 +6,17 @@
 
 ## Description
 
-Thales (*THAY-leez*) is a high-frequency, algorithmic trading bot designed for options trading, named after the Greek philosopher [Thales of Miletus](https://en.wikipedia.org/wiki/Thales_of_Miletus), who is credited with the first recorded use of an options contract. He's more well-known for [Thales' theorem](https://en.m.wikipedia.org/wiki/Thales%27s_theorem#:~:text=In%20geometry%2C%20Thales's%20theorem%20states,ABC%20is%20a%20right%20angle.).
+Thales (*THAY-leez*) is a high-frequency, algorithmic trading bot designed for trading options contracts, named after the Greek philosopher [Thales of Miletus](https://en.wikipedia.org/wiki/Thales_of_Miletus), who is credited with the first recorded use of an options contract.
 
-The bot uses the Black-Scholes model in combination with various statistical models to identify options that are "mispriced" by the market. If the bot thinks a call or put is currently undervalued, it will take a long position (and will take a short position if it thinks it's overvalued).
+The bot uses the Black-Scholes model in combination with various statistical models to identify options that are "mispriced" by the market. For example, if the bot thinks a call or put is currently undervalued, it will attempt to buy that call or put.
 
 ## Requirememts
 
-- C++17 compiler (e.g., GCC v7.1+, Clang v5.0+)
+- C++17 compiler (GCC v7.1+ or Clang v5.0+)
 - CMake v3.12+
-- Google Test for unit testing
-- Google Benchmark for benchmarking
+- Google Test v1.8.0+ for unit testing
+- Google Benchmark v1.3.0+ for benchmarking
+- libcurl v7.50.0+ for HTTP requests
 - API key from Polygon.io for real-time options data
 
 ## Build
