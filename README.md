@@ -36,13 +36,13 @@ Thales (*THAY-leez*) is an algorithmic trading bot designed for options trading,
 
 ## Usage
 
-To run the Thales trading bot, execute the following command from the `build` directory:
+To run thales, execute the following command inside the `build` directory:
 
 ```
 ./thales
 ```
 
-By default, the bot will run in paper trading mode using the Polygon.io API for simulating trades and tracking the paper trading portfolio. You can configure various settings, such as the trading strategy, risk management parameters, and data sources, by modifying the appropriate configuration files.
+By default, thales will run in paper trading mode using the Polygon.io API for simulating trades and tracking the paper trading portfolio. You can configure various settings, such as the trading strategy, risk management parameters, and data sources, by modifying the appropriate configuration files.
 
 ## Testing
 
