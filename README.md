@@ -12,11 +12,11 @@ The bot uses the Black-Scholes model in combination with various statistical mod
 
 ## Requirememts
 
-- C++17 compiler (e.g., gcc, clang)
-- cmake (version 3.12 or higher)
-- Google Test
-- Google Benchmark
-- Polygon.io API key
+- C++17 compiler (e.g., GCC, Clang)
+- CMake (version 3.12 or higher)
+- Google Test for unit testing
+- Google Benchmark for benchmarking
+- API key from Polygon.io for real-time options data
 
 ## Build
 
