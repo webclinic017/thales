@@ -8,13 +8,13 @@
 
 Thales (*THAY-leez*) is an algorithmic trading bot designed for options trading, named after the Greek philosopher [Thales of Miletus](https://en.wikipedia.org/wiki/Thales_of_Miletus), who is credited with the first recorded use of an options contract.
 
-## Prerequisites
+## Requirememts
 
-- C++17 compiler (e.g., GCC, Clang)
-- CMake (version 3.12 or higher)
-- Google Test (for unit testing)
-- Google Benchmark (for benchmarking)
-- Polygon.io C++ client library
+- C++17 compiler (e.g., gcc, clang)
+- cmake (version 3.12 or higher)
+- Google Test
+- Google Benchmark
+- Polygon.io API key
 
 ## Build
 
