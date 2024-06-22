@@ -25,6 +25,7 @@
 #include "trading/portfolio.h"
 
 #include <iostream>
+#include <iomanip>
 #include <vector>
 
 #include "trading/order.h"
@@ -34,13 +35,13 @@ namespace thales {
 /**
  * @brief Constructs a Portfolio object.
  */
-Portfolio::Portfolio(double value, const std::vector<Position>& positions)
-    : value(value), positions(positions) {}
+Portfolio::Portfolio(double net_liquidity, const std::vector<Position>& positions)
+    : net_liquidity(net_liquidity), positions(positions) {}
 
 /**
  * @brief Getters for Portfolio class members.
  */
-double Portfolio::get_value() const { return value; }
+double Portfolio::get_net_liquidity() const { return net_liquidity; }
 std::vector<Position> Portfolio::get_positions() const { return positions; }
 
 /**
@@ -84,16 +85,31 @@ std::vector<Order> fetch_orders() {
  * @param portfolio The portfolio to display.
  */
 void display_portfolio(const Portfolio& portfolio) {
-    std::cout << "Portfolio Value: $" << portfolio.get_value()
-              << "\nPositions:\n";
+   // Display the header
+    std::cout << std::left << std::setw(10) << "Symbol"
+              << std::setw(10) << "Type"
+              << std::setw(10) << "Strike"
+              << std::setw(15) << "Expiration"
+              << std::setw(10) << "Quantity"
+              << std::setw(10) << "Premium"
+              << std::endl;
+
+    std::cout << std::string(65, '-') << std::endl;
+
+    // Display the portfolio positions
     for (const auto& position : portfolio.get_positions()) {
-        std::cout << "  " << position.get_symbol() << " "
-                  << position.get_option_type() << " "
-                  << position.get_strike_price() << " @ "
-                  << position.get_expiration_date() << ": "
-                  << position.get_quantity() << " contracts @ $"
-                  << position.get_premium() << "\n";
+        std::cout << std::left << std::setw(10) << position.get_symbol()
+                  << std::setw(10) << position.get_option_type()
+                  << std::setw(10) << position.get_strike_price()
+                  << std::setw(15) << position.get_expiration_date()
+                  << std::setw(10) << position.get_quantity()
+                  << std::setw(10) << position.get_premium()
+                  << std::endl;
     }
+
+    // Display the net liquidity
+    std::cout << std::string(65, '-') << std::endl;
+    std::cout << std::left << std::setw(55) << "Net Liquidity: " << "$" << portfolio.get_net_liquidity() << std::endl;
 }
 
 /**
@@ -102,7 +118,7 @@ void display_portfolio(const Portfolio& portfolio) {
  * @param orders The list of orders to display.
  */
 void display_orders(const std::vector<Order>& orders) {
-    std::cout << "Recent Orders:\n";
+    std::cout << "Recent orders:\n";
     for (const auto& order : orders) {
         std::cout << "  " << order.get_timestamp() << " - "
                   << order.get_action() << " " << order.get_quantity() << " "
