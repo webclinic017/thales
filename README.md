@@ -60,13 +60,14 @@ Thales uses [Google Benchmark](https://github.com/google/benchmark) for benchmar
 
 1. Build the benchmarks (if not already built):
    ```
-   cmake --build build --target run_benchmarks
+   cmake --build build --target thales_benchmarks
    ```
 
 2. Run the benchmarks:
    ```
    cd build
-   make run_benchmarks
+   make thales_benchmarks
+   ./thales_benchmarks
    ```
 
 This will execute all the registered benchmarks and display the results.
