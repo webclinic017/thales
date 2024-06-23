@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# Update the PATH to include the directory where clang-tidy is installed
+export PATH="/opt/homebrew/opt/llvm/bin:/usr/local/bin:/usr/bin:/bin:$PATH"
+
 # Navigate to the project root directory
 PROJECT_ROOT=$(git rev-parse --show-toplevel)
 cd "$PROJECT_ROOT"
