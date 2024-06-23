@@ -1,65 +1,47 @@
-/*
- * MIT License
- *
- * Copyright (c) 2024 Cody Michael Jones
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
- */
-
 #include <benchmark/benchmark.h>
-
-#include <vector>
 
 #include "trading/portfolio.h"
 #include "trading/position.h"
 
-static void BM_PortfolioConstruction(benchmark::State& state) {
-    for (auto _ : state) {
+static void BM_PortfolioCreation(benchmark::State& state) {
+    // Constants
+    const double AAPL_CALL_STRIKE = 150.0;
+    const double TSLA_PUT_STRIKE = 700.0;
+    const double AAPL_CALL_PREMIUM = 5.0;
+    const double TSLA_PUT_PREMIUM = 10.0;
+    const int AAPL_CALL_QUANTITY = 10;
+    const int TSLA_PUT_QUANTITY = 5;
+    const double INITIAL_PORTFOLIO_NET_LIQ = 10000.0;
+
+    for (auto state_iter : state) {
         std::vector<thales::Position> positions = {
-            thales::Position("AAPL", "Call", 150.0, "2024-12-15", 10, 5.0),
-            thales::Position("TSLA", "Put", 700.0, "2024-12-15", 5, 10.0)};
-        thales::Portfolio portfolio(10000.0, positions);
-        benchmark::DoNotOptimize(portfolio);
+            thales::Position("AAPL", "Call", AAPL_CALL_STRIKE, "2024-12-15",
+                             AAPL_CALL_QUANTITY, AAPL_CALL_PREMIUM),
+            thales::Position("TSLA", "Put", TSLA_PUT_STRIKE, "2024-12-15",
+                             TSLA_PUT_QUANTITY, TSLA_PUT_PREMIUM)};
+        thales::Portfolio portfolio(INITIAL_PORTFOLIO_NET_LIQ, positions);
     }
 }
-BENCHMARK(BM_PortfolioConstruction);
+BENCHMARK(BM_PortfolioCreation);
 
-static void BM_PortfolioGetNetLiquidity(benchmark::State& state) {
-    std::vector<thales::Position> positions = {
-        thales::Position("AAPL", "Call", 150.0, "2024-12-15", 10, 5.0),
-        thales::Position("TSLA", "Put", 700.0, "2024-12-15", 5, 10.0)};
-    thales::Portfolio portfolio(10000.0, positions);
-    for (auto _ : state) {
-        double net_liquidity = portfolio.get_net_liquidity();
-        benchmark::DoNotOptimize(net_liquidity);
-    }
-}
-BENCHMARK(BM_PortfolioGetNetLiquidity);
+static void BM_PortfolioNetLiquidityCalculation(benchmark::State& state) {
+    // Constants
+    const double AAPL_CALL_STRIKE = 150.0;
+    const double TSLA_PUT_STRIKE = 700.0;
+    const double AAPL_CALL_PREMIUM = 5.0;
+    const double TSLA_PUT_PREMIUM = 10.0;
+    const int AAPL_CALL_QUANTITY = 10;
+    const int TSLA_PUT_QUANTITY = 5;
+    const double INITIAL_PORTFOLIO_NET_LIQ = 10000.0;
 
-static void BM_PortfolioGetPositions(benchmark::State& state) {
-    std::vector<thales::Position> positions = {
-        thales::Position("AAPL", "Call", 150.0, "2024-12-15", 10, 5.0),
-        thales::Position("TSLA", "Put", 700.0, "2024-12-15", 5, 10.0)};
-    thales::Portfolio portfolio(10000.0, positions);
-    for (auto _ : state) {
-        auto pos = portfolio.get_positions();
-        benchmark::DoNotOptimize(pos);
+    for (auto state_iter : state) {
+        std::vector<thales::Position> positions = {
+            thales::Position("AAPL", "Call", AAPL_CALL_STRIKE, "2024-12-15",
+                             AAPL_CALL_QUANTITY, AAPL_CALL_PREMIUM),
+            thales::Position("TSLA", "Put", TSLA_PUT_STRIKE, "2024-12-15",
+                             TSLA_PUT_QUANTITY, TSLA_PUT_PREMIUM)};
+        thales::Portfolio portfolio(INITIAL_PORTFOLIO_NET_LIQ, positions);
+        benchmark::DoNotOptimize(portfolio.get_net_liquidity());
     }
 }
-BENCHMARK(BM_PortfolioGetPositions);
+BENCHMARK(BM_PortfolioNetLiquidityCalculation);
