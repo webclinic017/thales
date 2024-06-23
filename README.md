@@ -8,7 +8,7 @@
 
 Thales (*THAY-leez*) is a high-frequency, algorithmic trading bot designed for trading options contracts, named after the Greek philosopher [Thales of Miletus](https://en.wikipedia.org/wiki/Thales_of_Miletus), who is credited with the first recorded use of an options contract.
 
-The bot uses the Black-Scholes model in combination with various statistical models to identify options that are "mispriced" by the market. For example, if the bot thinks a call or put is currently undervalued, it will attempt to buy that call or put.
+The bot uses the Black-Scholes formula and various statistical models to identify options that are "mispriced" by the market. For example, if the bot thinks a call or put is currently undervalued, it will attempt to buy that call or put.
 
 ## Requirements
 
