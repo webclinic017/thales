@@ -33,3 +33,4 @@
 config/polygon_credentials.cfg
 
 build/
+.vscode/settings.json
