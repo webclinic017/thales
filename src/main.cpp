@@ -39,7 +39,7 @@ int main() {
     try {
         api_key = Config::get_api_key();
     } catch (const std::exception& e) {
-        std::cerr << "Error: " << e.what() << std::endl;
+        std::cerr << "Error: " << e.what() << "\n";
         return EXIT_FAILURE;
     }
 
@@ -53,7 +53,7 @@ int main() {
     try {
         result = http_client.get(url);
     } catch (const std::exception& e) {
-        std::cerr << "HTTP request failed: " << e.what() << std::endl;
+        std::cerr << "HTTP request failed: " << e.what() << "\n";
         return EXIT_FAILURE;
     }
 
