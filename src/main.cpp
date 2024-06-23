@@ -35,6 +35,7 @@ using namespace thales;
 
 int main() {
     std::string api_key;
+
     try {
         api_key = Config::get_api_key();
     } catch (const std::exception& e) {
@@ -48,6 +49,7 @@ int main() {
         "2023-01-31?apiKey=" +
         api_key;
     std::string result;
+
     try {
         result = http_client.get(url);
     } catch (const std::exception& e) {
@@ -56,11 +58,9 @@ int main() {
     }
 
     while (true) {
-        // Fetch and display portfolio information
         Portfolio portfolio = fetch_portfolio();
         display_portfolio(portfolio);
 
-        // Fetch and display executed orders
         std::vector<Order> orders = fetch_orders();
         display_orders(orders);
 
