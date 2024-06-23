@@ -23,40 +23,39 @@
  */
 
 #include <benchmark/benchmark.h>
+
+#include <vector>
+
 #include "trading/portfolio.h"
 #include "trading/position.h"
-#include <vector>
 
 static void BM_PortfolioConstruction(benchmark::State& state) {
     for (auto _ : state) {
         std::vector<thales::Position> positions = {
             thales::Position("AAPL", "Call", 150.0, "2024-12-15", 10, 5.0),
-            thales::Position("TSLA", "Put", 700.0, "2024-12-15", 5, 10.0)
-        };
+            thales::Position("TSLA", "Put", 700.0, "2024-12-15", 5, 10.0)};
         thales::Portfolio portfolio(10000.0, positions);
         benchmark::DoNotOptimize(portfolio);
     }
 }
 BENCHMARK(BM_PortfolioConstruction);
 
-static void BM_PortfolioGetValue(benchmark::State& state) {
+static void BM_PortfolioGetNetLiquidity(benchmark::State& state) {
     std::vector<thales::Position> positions = {
         thales::Position("AAPL", "Call", 150.0, "2024-12-15", 10, 5.0),
-        thales::Position("TSLA", "Put", 700.0, "2024-12-15", 5, 10.0)
-    };
+        thales::Position("TSLA", "Put", 700.0, "2024-12-15", 5, 10.0)};
     thales::Portfolio portfolio(10000.0, positions);
     for (auto _ : state) {
-        double value = portfolio.get_value();
-        benchmark::DoNotOptimize(value);
+        double net_liquidity = portfolio.get_net_liquidity();
+        benchmark::DoNotOptimize(net_liquidity);
     }
 }
-BENCHMARK(BM_PortfolioGetValue);
+BENCHMARK(BM_PortfolioGetNetLiquidity);
 
 static void BM_PortfolioGetPositions(benchmark::State& state) {
     std::vector<thales::Position> positions = {
         thales::Position("AAPL", "Call", 150.0, "2024-12-15", 10, 5.0),
-        thales::Position("TSLA", "Put", 700.0, "2024-12-15", 5, 10.0)
-    };
+        thales::Position("TSLA", "Put", 700.0, "2024-12-15", 5, 10.0)};
     thales::Portfolio portfolio(10000.0, positions);
     for (auto _ : state) {
         auto pos = portfolio.get_positions();
