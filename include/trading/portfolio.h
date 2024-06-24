@@ -25,26 +25,38 @@
 #pragma once
 
 #include <vector>
-#include "order.h"
 #include "position.h"
 
 namespace thales {
 
+/**
+ * @class Portfolio
+ * @brief Represents a portfolio of options positions.
+ */
 class Portfolio {
 public:
+    /**
+     * @brief Constructs a Portfolio object.
+     * @param net_liquidity The net liquidity of the portfolio.
+     * @param positions The positions held in the portfolio.
+     */
     Portfolio(double net_liquidity, const std::vector<Position>& positions);
 
+    /**
+     * @brief Gets the net liquidity of the portfolio.
+     * @return The net liquidity.
+     */
     double get_net_liquidity() const;
-    std::vector<Position> get_positions() const;
+
+    /**
+     * @brief Gets the positions held in the portfolio.
+     * @return The positions.
+     */
+    const std::vector<Position>& get_positions() const;
 
 private:
-    double net_liquidity;
-    std::vector<Position> positions;
+    double net_liquidity;       /**< The net liquidity of the portfolio */
+    std::vector<Position> positions; /**< The positions held in the portfolio */
 };
-
-Portfolio fetch_portfolio();
-std::vector<Order> fetch_orders();
-void display_portfolio(const Portfolio& portfolio);
-void display_orders(const std::vector<Order>& orders);
 
 }  // namespace thales
