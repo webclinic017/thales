@@ -1,4 +1,5 @@
 #!/bin/sh
+set -e
 
 # Navigate to the project root directory
 cd "$(git rev-parse --show-toplevel)"
