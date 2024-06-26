@@ -77,7 +77,7 @@ This will execute all the registered benchmarks and display the results.
 
 ## Configuration
 
-Thales can be configured through various configuration files inside `config` directory. Here's a brief overview of the available configuration options:
+Thales can be configured through various configuration files inside the `config` directory. Here's a brief overview of the available configuration options:
 
 - `polygon_credentials.cfg` (required): Contains the Polygon.io API key for accessing real-time and historical options data.
 - `trading_strategy.cfg`: Defines the parameters and settings for the trading strategy.
