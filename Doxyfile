@@ -1,7 +1,7 @@
 # Doxyfile 1.8.17
 
 # Project related configuration options
-PROJECT_NAME           = "thales"
+PROJECT_NAME           = "Thales"
 OUTPUT_DIRECTORY       = "docs"
 INPUT                  = "include src"
 RECURSIVE              = YES
