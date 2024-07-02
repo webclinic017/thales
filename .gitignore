@@ -33,4 +33,5 @@
 config/polygon_credentials.cfg
 
 build/
-.vscode/settings.json
+.vscode/
+.DS_Store
