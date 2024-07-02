@@ -29,6 +29,17 @@ To start the bot, simply execute the following command inside the `build` direct
 
 By default, thales will run in paper trading mode using the Polygon.io API for simulating trades and tracking the paper trading portfolio. You can configure various settings, such as the trading strategy, risk management parameters, and data sources, by modifying the appropriate configuration files.
 
+## Configuration
+
+Thales can be configured through various configuration files inside the `config` directory. Here's a brief overview of the available configuration options:
+
+- `polygon_credentials.cfg` (required): Contains the Polygon.io API key for accessing real-time and historical options data.
+- `trading_strategy.cfg`: Defines the parameters and settings for the trading strategy.
+- `risk_management.cfg`: Specifies risk management rules and thresholds.
+- `data_sources.cfg`: Configures the data sources for historical and real-time market data.
+
+Refer to the individual configuration files and the project documentation for more details on configuring the trading bot.
+
 ## Build
 
 1. Clone the repository:
@@ -75,20 +86,13 @@ Thales uses [Google Benchmark](https://github.com/google/benchmark) for benchmar
 
 This will execute all the registered benchmarks and display the results.
 
-## Configuration
+## Documentation
 
-Thales can be configured through various configuration files inside the `config` directory. Here's a brief overview of the available configuration options:
-
-- `polygon_credentials.cfg` (required): Contains the Polygon.io API key for accessing real-time and historical options data.
-- `trading_strategy.cfg`: Defines the parameters and settings for the trading strategy.
-- `risk_management.cfg`: Specifies risk management rules and thresholds.
-- `data_sources.cfg`: Configures the data sources for historical and real-time market data.
-
-Refer to the individual configuration files and the project documentation for more details on configuring the trading bot.
+Detailed documentation is generated automatically via [Doxygen](https://www.doxygen.nl/) when there's a push or a pull request on the main branch. It can be viewed [here](https://cm-jones.github.io/thales).
 
 ## Contributing
 
-If you find any issues or have suggestions for improvements, feel free to [open an issue](https://github.com/cm-jones/thales/issues/new) or submit a [pull request](https://github.com/thales/libdsc/compare).
+See [CONTRIBUTING.md](https://github.com/cm-jones/thales/CONTRIBUTING.md) for information on how to contribute to Thales.
 
 ## License
 
