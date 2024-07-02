@@ -1,61 +1,56 @@
-/*
- * MIT License
- *
- * Copyright (c) 2024 Cody Michael Jones
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
- */
+// SPDX-License-Identifier: MIT
 
 #pragma once
 
 #include <string>
+#include "option.h"
 
 namespace thales {
 
 /**
- * @brief Represents a single options order executed by the trading bot.
+ * @class Order
+ * @brief Represents an order for an options contract.
  */
 class Order {
-   public:
-    Order(const std::string& action, const std::string& symbol,
-          const std::string& option_type, double strike_price,
-          const std::string& expiration_date, int quantity, double premium,
-          const std::string& timestamp);
+public:
+    /**
+     * @brief Constructs an Order object.
+     * @param action The action of the order (e.g., "Buy" or "Sell").
+     * @param option The options contract associated with the order.
+     * @param quantity The number of options contracts in the order.
+     * @param timestamp The timestamp of the order.
+     */
+    Order(const std::string& action, const Option& option, int quantity, const std::string& timestamp);
 
-    std::string get_action() const;
-    std::string get_symbol() const;
-    std::string get_option_type() const;
-    double get_strike_price() const;
-    std::string get_expiration_date() const;
+    /**
+     * @brief Gets the action of the order.
+     * @return The action.
+     */
+    const std::string& get_action() const;
+
+    /**
+     * @brief Gets the options contract associated with the order.
+     * @return The options contract.
+     */
+    const Option& get_option() const;
+
+    /**
+     * @brief Gets the number of options contracts in the order.
+     * @return The quantity.
+     */
     int get_quantity() const;
-    double get_premium() const;
-    std::string get_timestamp() const;
 
-   private:
-    std::string action;      /**< The action taken (e.g., Buy or Sell). */
-    std::string symbol;      /**< The symbol of the underlying security. */
-    std::string option_type; /**< The type of the option (e.g., Call or Put). */
-    double strike_price;     /**< The strike price of the option. */
-    std::string expiration_date; /**< The expiration date of the option. */
-    int quantity;                /**< The number of option contracts traded. */
-    double premium;              /**< The premium paid per option contract. */
-    std::string timestamp;       /**< The timestamp of the order execution. */
+    /**
+     * @brief Gets the timestamp of the order.
+     * @return The timestamp.
+     */
+    const std::string& get_timestamp() const;
+
+private:
+    std::string action; /**< The action of the order */
+    Option option;      /**< The options contract */
+    int quantity;       /**< The number of options contracts */
+    std::string timestamp; /**< The timestamp of the order */
 };
 
 }  // namespace thales
