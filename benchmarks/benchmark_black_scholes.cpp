@@ -27,14 +27,16 @@
 
 static void BM_BlackScholes_Call(benchmark::State& state) {
     for (auto _ : state) {
-        benchmark::DoNotOptimize(BlackScholes::calculate_option_price(100.0, 100.0, 1.0, 0.05, 0.2, OptionType::CALL));
+        benchmark::DoNotOptimize(BlackScholes::calculate_option_price(
+            100.0, 100.0, 1.0, 0.05, 0.2, OptionType::CALL));
     }
 }
 BENCHMARK(BM_BlackScholes_Call);
 
 static void BM_BlackScholes_Put(benchmark::State& state) {
     for (auto _ : state) {
-        benchmark::DoNotOptimize(BlackScholes::calculate_option_price(100.0, 100.0, 1.0, 0.05, 0.2, OptionType::PUT));
+        benchmark::DoNotOptimize(BlackScholes::calculate_option_price(
+            100.0, 100.0, 1.0, 0.05, 0.2, OptionType::PUT));
     }
 }
 BENCHMARK(BM_BlackScholes_Put);
